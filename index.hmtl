@@ -26,9 +26,9 @@ function resize() { c.width = innerWidth; c.height = innerHeight - 50; ctx.fillS
 resize(); addEventListener('resize', resize);
 const sizeEl = document.getElementById('size');
 const colorEl = document.getElementById('color');
-function pos(e) { const r = c.getBoundingClientRect(); const t = e.touches ? e.touches[0] : e; return ; }
-function start(e) { drawing = true; = pos(e); }
-function move(e) { if (!drawing) return; e.preventDefault(); const = pos(e); ctx.strokeStyle = colorEl.value; ctx.lineWidth = sizeEl.value; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(x, y); ctx.stroke(); lastX = x; lastY = y; }
+function pos(e) { const r = c.getBoundingClientRect(); const t = e.touches ? e.touches[0] : e; return {x: t.clientX - r.left, y: t.clientY - r.top}; }
+function start(e) { drawing = true; const p = pos(e); lastX = p.x; lastY = p.y; }
+function move(e) { if (!drawing) return; e.preventDefault(); const p = pos(e); ctx.strokeStyle = colorEl.value; ctx.lineWidth = sizeEl.value; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(p.x, p.y); ctx.stroke(); lastX = p.x; lastY = p.y; }
 function stop() { drawing = false; }
 c.addEventListener('mousedown', start); c.addEventListener('mousemove', move); c.addEventListener('mouseup', stop); c.addEventListener('mouseleave', stop);
 c.addEventListener('touchstart', start); c.addEventListener('touchmove', move); c.addEventListener('touchend', stop);
