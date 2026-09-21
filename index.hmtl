@@ -6,5 +6,4 @@
 <title>BanditBox</title>
 <style>
   body { margin: 0; background: #111; color: #eee; font-family: sans-serif; }
-  #canvas { display: block; background: #fff; touch-action: none; }
-  .bar { padding: 8px; background: #222; display: flex; gap: 8px; align
+  #canvas { display: block; background: #fff; touch
